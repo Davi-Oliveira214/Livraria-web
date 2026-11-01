@@ -13,7 +13,7 @@ export default function Header() {
    const [scrollado, setScrollado] = useState(false)
 
    useEffect(() => {
-      const onScroll = () => setScrollado(window.scrollY > 10)
+      const onScroll = () => setScrollado(window.scrollY > 30)
       window.addEventListener('scroll', onScroll)
       return () => window.removeEventListener('scroll', onScroll)
    }, [])
