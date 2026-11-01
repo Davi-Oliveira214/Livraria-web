@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+@theme {
+   --color-verde-200: #90a955;
+   --color-verde-300: #588157;
+   --color-verde-400: #3a5a40;
+   --color-verde-800: #091a09;
+
+   --color-light: #ecf39e;
+   --color-black: #070707;
+}
+
+@layer components {
+   .ativo {
+      @apply bg-verde-200 border-verde-400 text-verde-800;
+   }
+}

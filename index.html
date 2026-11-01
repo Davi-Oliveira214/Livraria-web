@@ -1,46 +1,17 @@
 <!doctype html>
 <html lang="pt-br">
+   <head>
+      <meta charset="UTF-8" />
+      <link rel="icon" type="image/svg+xml" href="" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>livraria-web</title>
+   </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Livraria</title>
-
-    <!-- Css -->
-    <link rel="stylesheet" href="/src/assets/css/style.css" />
-    <link rel="stylesheet" href="/src/assets/css/pages/inicial.css" />
-
-    <!-- JavaScript -->
-    <script src="/src/assets/js/app.js" defer></script>
-    <script src="/src/assets/js/modules/index.js" type="module" defer></script>
-</head>
-
-<body>
-    <script>
-        const header = "../src/components/header.html";
-
-        fetch(header)
-            .then((resp) => resp.text())
-            .then((data) =>
-                document.body.insertAdjacentHTML("afterbegin", data),
-            );
-    </script>
-
-    <section class="banner">
-        <img src="" alt="" />
-    </section>
-
-    <main class="main">
-        <section class="filtros">
-        </section>
-
-        <section class="caixa">
-            <div class="lista" id="lista">
-                <input type="radio" name="filtro" id="todos" onclick="dados()" />
-                <label for="todos" class="item">Todos</label>
-            </div>
-        </section>
-    </main>
-</body>
-
+   <body>
+      <div
+         id="root"
+         class="w-full min-h-screen flex flex-col items-center relative"
+      ></div>
+      <script type="module" src="./src/main.jsx"></script>
+   </body>
 </html>
