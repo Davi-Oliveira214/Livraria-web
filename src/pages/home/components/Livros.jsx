@@ -8,14 +8,17 @@ export default function Livros() {
 
    useEffect(() => {
       const resulte = async () => {
-         const resp = await api.get()
-         const data = await resp.data
+         const resp = await api
+            .get()
+            .then((data) => data.data)
+            .catch(() => setMensagem('Erro ao procurar livros'))
 
-         if (data.length == 0) {
+         if (resp.length == 0) {
             setMensagem('nenhum livro cadastrado')
+            return
          }
 
-         setLivros(data)
+         setLivros(resp)
       }
 
       resulte()
