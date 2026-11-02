@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Estoque, Informacao, Sinopse, Titulo } from './InfoLivro'
+import { Aviso, Estoque, Informacao, Sinopse, Titulo } from './InfoLivro'
 import { api } from '../../../api/api'
-import { IconInfoCircle } from '@tabler/icons-react'
 
 export default function CardDetalhes({ id, onClick }) {
    const [livro, setLivro] = useState(null)
@@ -26,19 +25,19 @@ export default function CardDetalhes({ id, onClick }) {
          className='fixed z-100 inset-0 flex items-center justify-center bg-verde-800/50 backdrop-blur-xs px-4'
          onClick={onClick}
       >
-         {livro ? (
+         {!livro ? (
+            <Aviso mensagem={mensagem} />
+         ) : (
             <div
                className='w-full max-w-sm bg-verde-800 border border-verde-300/20 rounded-2xl overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.5)]'
                onClick={(e) => e.stopPropagation()}
             >
-               {/* Header */}
                <div className='flex items-start justify-between gap-2 px-4 py-3.5 bg-preto/25 border-b border-branco/[.06]'>
                   <Titulo titulo={livro.titulo} />
                   <Estoque estoque={livro.estoque} />
                </div>
 
                <div className='flex flex-col gap-3 p-4'>
-                  {/* Informações */}
                   <div className='grid grid-cols-2 gap-1.5'>
                      <Informacao tema='autor' texto={livro.autor} />
                      <Informacao tema='gênero' texto={livro.genero} />
@@ -57,16 +56,6 @@ export default function CardDetalhes({ id, onClick }) {
 
                   <Botao texto='Fechar' onClick={onClick} />
                </div>
-            </div>
-         ) : (
-            <div
-               className='flex items-center gap-2.5 px-4 py-3 bg-verde-800 border border-verde-300/20 rounded-xl'
-               onClick={(e) => e.stopPropagation()}
-            >
-               <IconInfoCircle stroke={2} size={25} color='#588157' />
-               <p className='text-base text-verde-300 font-medium'>
-                  {mensagem}
-               </p>
             </div>
          )}
       </div>

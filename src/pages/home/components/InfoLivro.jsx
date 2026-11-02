@@ -1,3 +1,5 @@
+import { IconInfoCircle } from '@tabler/icons-react'
+
 export function Titulo({ titulo }) {
    return <p className='text-xl text-white font-semibold'>{titulo}</p>
 }
@@ -33,5 +35,17 @@ export function Estoque({ estoque }) {
       <span className='shrink-0 text-[10px] text-[#F1F5E9] bg-[#2D4A35] px-2 py-1 rounded-md border border-verde-300/50'>
          Estoque: {estoque}
       </span>
+   )
+}
+
+export function Aviso({ mensagem }) {
+   return (
+      <div
+         className='flex items-center gap-2.5 px-4 py-3 bg-verde-800 border border-verde-300/20 rounded-xl'
+         onClick={(e) => e.stopPropagation()}
+      >
+         <IconInfoCircle stroke={2} size={25} color='#588157' />
+         <p className='text-base text-verde-300 font-medium'>{mensagem}</p>
+      </div>
    )
 }

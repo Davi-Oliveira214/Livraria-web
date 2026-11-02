@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CardDetalhes from './CardDetalhes'
 import { Estoque, Informacao, Sinopse, Titulo } from './InfoLivro'
+import CardEditar from './CardEditar'
 
 export default function CardLivro({ livro }) {
    const {
@@ -15,10 +16,15 @@ export default function CardLivro({ livro }) {
       lancamento,
    } = livro
 
-   const [open, setOpen] = useState(false)
+   const [openDetalhes, setOpenDetalhes] = useState(false)
+   const [openEditar, setOpenEditar] = useState(false)
 
-   const openCard = () => {
-      setOpen((prev) => !prev)
+   const openCardDetalhes = () => {
+      setOpenDetalhes((prev) => !prev)
+   }
+
+   const openCardEditar = () => {
+      setOpenEditar((prev) => !prev)
    }
 
    return (
@@ -46,14 +52,19 @@ export default function CardLivro({ livro }) {
 
             <div className='flex flex-col gap-2'>
                <div className='grid grid-cols-2 gap-2'>
-                  <Botao texto='detalhes' onClick={openCard} />
-                  <Botao texto='editar' tipo='editar' />
+                  <Botao texto='detalhes' onClick={openCardDetalhes} />
+                  <Botao
+                     texto='editar'
+                     tipo='editar'
+                     onClick={openCardEditar}
+                  />
                </div>
 
                <Botao texto='apagar' tipo='apagar' />
             </div>
          </div>
-         {open && <CardDetalhes id={id} onClick={openCard} />}
+         {openDetalhes && <CardDetalhes id={id} onClick={openCardDetalhes} />}
+         {openEditar && <CardEditar id={id} onClick={openCardEditar} />}
       </>
    )
 }
