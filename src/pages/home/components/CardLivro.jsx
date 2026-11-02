@@ -2,6 +2,7 @@ import { useState } from 'react'
 import CardDetalhes from './CardDetalhes'
 import { Estoque, Informacao, Sinopse, Titulo } from './InfoLivro'
 import CardEditar from './CardEditar'
+import { CardApagar } from './CardApagar'
 
 export default function CardLivro({ livro }) {
    const {
@@ -18,6 +19,7 @@ export default function CardLivro({ livro }) {
 
    const [openDetalhes, setOpenDetalhes] = useState(false)
    const [openEditar, setOpenEditar] = useState(false)
+   const [openApagar, setOpenApagar] = useState(false)
 
    const openCardDetalhes = () => {
       setOpenDetalhes((prev) => !prev)
@@ -27,9 +29,13 @@ export default function CardLivro({ livro }) {
       setOpenEditar((prev) => !prev)
    }
 
+   const openCardApagar = () => {
+      setOpenApagar((prev) => !prev)
+   }
+
    return (
       <>
-         <div className='bg-verde-800 rounded-xl p-3 flex flex-col gap-4 border border-verde-300 shadow-lg snap-center'>
+         <div className='bg-verde-800 rounded-xl p-3 flex flex-col gap-4 border border-verde-300 shadow-lg snap-center justify-between'>
             <div className='flex items-start justify-between gap-2'>
                <Titulo titulo={titulo} />
 
@@ -60,11 +66,12 @@ export default function CardLivro({ livro }) {
                   />
                </div>
 
-               <Botao texto='apagar' tipo='apagar' />
+               <Botao texto='apagar' tipo='apagar' onClick={openCardApagar} />
             </div>
          </div>
          {openDetalhes && <CardDetalhes id={id} onClick={openCardDetalhes} />}
          {openEditar && <CardEditar id={id} onClick={openCardEditar} />}
+         {openApagar && <CardApagar id={id} onClick={openCardApagar} />}
       </>
    )
 }
