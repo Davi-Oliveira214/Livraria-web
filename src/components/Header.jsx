@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import icon from '../assets/icon/livro.png'
+import { Link, useLocation } from 'react-router'
 
 const ITENS = [
    { id: 'home', nome: 'Home' },
@@ -33,15 +34,17 @@ export default function Header() {
                 ${scrollado ? 'fixed max-w-[95%] top-3 rounded-[30px]' : 'static'}
             `}
          >
-            <img src={icon} alt='Logo' className='h-12' />
+            <Link to={'/'}>
+               <img src={icon} alt='Logo' className='h-12' />
+            </Link>
 
             <nav className='hidden md:flex' aria-label='Navegação principal'>
                <ul className='flex items-center gap-2'>
                   {ITENS.map((item) => (
                      <ItemMenu
                         key={item.id}
+                        id={item.id}
                         nome={item.nome}
-                        selecionado={ativo === item.id}
                         onClick={() => selecionar(item.id)}
                      />
                   ))}
@@ -78,8 +81,8 @@ export default function Header() {
             {ITENS.map((item) => (
                <ItemMenu
                   key={item.id}
+                  id={item.id}
                   nome={item.nome}
-                  selecionado={ativo === item.id}
                   onClick={() => selecionar(item.id)}
                />
             ))}
@@ -100,19 +103,24 @@ function Barra({ aberto, index }) {
    )
 }
 
-function ItemMenu({ nome, selecionado, onClick }) {
+function ItemMenu({ id, nome, onClick }) {
+   let path = ''
+   if (id == 'home') path = '/'
+   else path = '/' + id
+   const location = useLocation()
+
    return (
       <li
          className={`cursor-pointer list-none w-full text-center font-bold border-2 py-0.5 px-3 rounded-2xl transition-all duration-300 hover:-translate-y-0.5 hover:cursor-pointer
                     ${
-                       selecionado
+                       location.pathname == path
                           ? 'border-verde-200 text-verde-200 bg-verde-700/40'
                           : 'border-verde-400 text-verde-200 hover:border-verde-300'
                     }`}
       >
-         <button type='button' onClick={onClick}>
+         <Link to={`./${path}`} type='button' onClick={onClick}>
             {nome}
-         </button>
+         </Link>
       </li>
    )
 }
